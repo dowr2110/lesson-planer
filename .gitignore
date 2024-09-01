@@ -44,3 +44,11 @@
 config/database.yml
 config/secrets.yml
 config/sidekiq.yml
+
+/node_modules
+
+/public/vite*
+node_modules
+
+*.local
+

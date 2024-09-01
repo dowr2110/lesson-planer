@@ -1,0 +1,12 @@
+.section-content {
+  border-radius: 4px;
+  padding: var(--secton-content-indents);
+  background-color: #fff;
+  border: 1px solid gray;
+}
+
+.page-section {
+  &:not(:first-child) {
+    margin-top: 20px;
+  }
+}
