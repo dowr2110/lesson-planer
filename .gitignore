@@ -33,3 +33,10 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+/.idea/
+
+.DS_Store
+
+/config/secrets.yml
+/config/tenants.yml
