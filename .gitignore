@@ -40,3 +40,7 @@
 
 /config/secrets.yml
 /config/tenants.yml
+
+config/database.yml
+config/secrets.yml
+config/sidekiq.yml
