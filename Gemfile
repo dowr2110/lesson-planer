@@ -5,6 +5,7 @@ source 'https://rubygems.org'
 ruby '3.0.0'
 
 gem 'rails', '~> 7.1.3'
+
 gem 'sprockets-rails'
 
 gem 'pg', '~> 1.1'
@@ -24,6 +25,10 @@ gem 'dotenv-rails'
 gem 'vite_rails'
 
 gem 'sassc-rails'
+
+gem 'devise'
+
+gem 'simple_form'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"

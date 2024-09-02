@@ -5,20 +5,7 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* Ruby version - 3.0.0
+* Node version - 22.7.0
+* run commands: bundle install and yarn install (or nmp install)
+* Front-end builder command: bin/vite dev
