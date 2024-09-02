@@ -1,0 +1,36 @@
+h1 Welcome to the Home Page
+- if user_signed_in?
+  p Hello, #{current_user.email}!
+  - if @profile
+    h2 Your Profile
+    - if @profile.avatar.attached?
+      = image_tag @profile.avatar, width: 150, height: 150
+
+    - if current_user.student?
+      p
+        strong Level of Knowledge:
+        = @profile.level_of_knowledge
+      p
+        strong Interests:
+        = @profile.interests
+      = link_to 'Edit Profile', edit_student_profile_path(@profile), class: 'btn btn-primary'
+    - elsif current_user.teacher?
+      p
+        strong Specialization:
+        = @profile.specialization
+      p
+        strong Experience:
+        = @profile.experience
+      = link_to 'Edit Profile', edit_teacher_profile_path(@profile), class: 'btn btn-primary'
+  - else
+    - if current_user.student?
+      p No profile found.
+      = link_to 'Create Student Profile', new_student_profile_path
+    - elsif current_user.teacher?
+      p No profile found.
+      = link_to 'Create Teacher Profile', new_teacher_profile_path
+  = link_to 'Logout', destroy_user_session_path, method: :delete
+- else
+  = link_to 'Sign up', new_user_registration_path
+  |  or
+  = link_to 'Login', new_user_session_path

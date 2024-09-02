@@ -1,0 +1,11 @@
+= simple_form_for @student_profile do |f|
+  = f.input :level_of_knowledge
+  = f.input :interests
+  - if @student_profile.avatar.attached?
+    div
+      p Current avatar:
+      = image_tag @student_profile.avatar, width: 150, height: 150
+  div
+    = f.label :avatar, "Upload new avatar"
+    = f.file_field :avatar
+  = f.submit
