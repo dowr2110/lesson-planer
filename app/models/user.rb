@@ -32,4 +32,6 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :teacher_profile
   accepts_nested_attributes_for :student_profile
+
+
 end

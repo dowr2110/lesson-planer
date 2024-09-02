@@ -7,4 +7,8 @@ Rails.application.routes.draw do
 
   resources :teacher_profiles, only: %i[new create edit update]
   resources :student_profiles, only: %i[new create edit update]
+
+  resources :chats, only: %i[index show create] do
+    resources :messages, only: [:create]
+  end
 end

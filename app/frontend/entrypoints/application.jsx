@@ -1,5 +1,6 @@
 import '../styles/application.scss'
 import '../packs/lessons.js'
+import '../packs/chat.js'
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
