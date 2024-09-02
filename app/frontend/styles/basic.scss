@@ -10,3 +10,25 @@
     margin-top: 20px;
   }
 }
+
+.flash {
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.flash.notice {
+  background-color: #dff0d8;
+  color: #3c763d;
+}
+
+.flash.alert {
+  background-color: #f2dede;
+  color: #a94442;
+}
+
+.flash.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}

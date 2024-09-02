@@ -1,0 +1,18 @@
+<%= simple_form_for @teacher_profile do |f| %>
+  <%= f.input :specialization %>
+  <%= f.input :experience %>
+  <%= f.input :courses %>
+  <% if @teacher_profile.avatar.attached? %>
+    <div>
+      <p>Current avatar:</p>
+      <%= image_tag @teacher_profile.avatar, width: 150, height: 150 %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= f.label :avatar, "Upload new avatar" %>
+    <%= f.file_field :avatar %>
+  </div>
+
+  <%= f.submit %>
+<% end %>
