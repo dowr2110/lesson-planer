@@ -23,5 +23,7 @@ class Message < ApplicationRecord
   belongs_to :user
   belongs_to :chat
 
+  encrypts :content
+
   validates :content, presence: true
 end
