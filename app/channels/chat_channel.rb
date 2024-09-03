@@ -8,8 +8,8 @@ class ChatChannel < ApplicationCable::Channel
   def unsubscribed; end
 
   def send_message(data)
-    message = Message.create!(content: data['message'], user_id: current_user.id, chat_id: params[:chat_id])
-    ActionCable.server.broadcast("chat_#{params[:chat_id]}", message: render_message(message))
+    message = Message.create!(content: data['message'], user_id: data['user_id'], chat_id: params[:chat_id])
+    ChatChannel.broadcast_to("chat_#{params[:chat_id]}", message: render_message(message))
   end
 
   private

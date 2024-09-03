@@ -1,7 +1,8 @@
+// imports for js and css
 import '../styles/application.scss'
 import '../packs/lessons.js'
-import '../packs/chat.js'
 
+// React
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import TestComponent from '../components/TestComponent.jsx';
@@ -22,3 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+//Rails
+import Rails from "@rails/ujs";
+Rails.start();

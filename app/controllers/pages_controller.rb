@@ -1,8 +1,8 @@
 class PagesController < ApplicationController
   def home
-    if current_user.teacher?
+    if user_signed_in? && current_user.teacher?
       @profile = current_user.teacher_profile
-    elsif current_user.student?
+    elsif user_signed_in? && current_user.student?
       @profile = current_user.student_profile
     end
   end

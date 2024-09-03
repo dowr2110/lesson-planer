@@ -29,7 +29,8 @@ h1 Welcome to the Home Page
     - elsif current_user.teacher?
       p No profile found.
       = link_to 'Create Teacher Profile', new_teacher_profile_path
-  = link_to 'Logout', destroy_user_session_path, method: :delete
+  br
+  = link_to 'Logout', destroy_user_session_path, method: 'delete'
 - else
   = link_to 'Sign up', new_user_registration_path
   |  or
