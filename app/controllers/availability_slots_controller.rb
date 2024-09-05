@@ -11,7 +11,7 @@ class AvailabilitySlotsController < ApplicationController
         if current_user.teacher?
           availability_slots = AvailabilitySlot.free.available.where(teacher_id: current_user.id)
         elsif current_user.student?
-          availability_slots = AvailabilitySlot.free.available
+          availability_slots = AvailabilitySlot.free.available.where(teacher_id: current_user.teachers.pluck(:id))
         end
 
         my_booked_slots = current_user.booked_slots.available

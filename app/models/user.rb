@@ -35,6 +35,17 @@ class User < ApplicationRecord
 
   has_many :bookings
 
+  has_many :student_teacher_connections_as_student,
+           foreign_key: :student_id,
+           class_name: 'StudentTeacherConnection'
+  has_many :teachers, through: :student_teacher_connections_as_student, source: :teacher
+
+  has_many :student_teacher_connections_as_teacher,
+           foreign_key: :teacher_id,
+           class_name: 'StudentTeacherConnection'
+  has_many :students, through: :student_teacher_connections_as_teacher, source: :student
+
+
   def booked_slots
     if student?
       AvailabilitySlot.joins(:booking).where(bookings: { user_id: id })

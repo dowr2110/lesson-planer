@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_03_190351) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_05_210258) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -88,6 +88,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_190351) do
     t.index ["user_id"], name: "index_student_profiles_on_user_id"
   end
 
+  create_table "student_teacher_connections", force: :cascade do |t|
+    t.bigint "student_id", null: false
+    t.bigint "teacher_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["student_id", "teacher_id"], name: "index_student_teacher_connections_on_student_id_and_teacher_id", unique: true
+    t.index ["student_id"], name: "index_student_teacher_connections_on_student_id"
+    t.index ["teacher_id"], name: "index_student_teacher_connections_on_teacher_id"
+  end
+
   create_table "teacher_profiles", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "specialization"
@@ -120,5 +130,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_03_190351) do
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
   add_foreign_key "student_profiles", "users"
+  add_foreign_key "student_teacher_connections", "users", column: "student_id"
+  add_foreign_key "student_teacher_connections", "users", column: "teacher_id"
   add_foreign_key "teacher_profiles", "users"
 end
