@@ -14,7 +14,7 @@ html
   body
     .flash-messages
       - flash.each do |key, message|
-        .flash
+        div class="flash #{ key }"
           = message
 
 

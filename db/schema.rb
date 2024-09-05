@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_02_185249) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_03_190351) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -40,6 +40,24 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_02_185249) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
+  create_table "availability_slots", force: :cascade do |t|
+    t.bigint "teacher_id", null: false
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["teacher_id"], name: "index_availability_slots_on_teacher_id"
+  end
+
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "availability_slot_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["availability_slot_id"], name: "index_bookings_on_availability_slot_id"
+    t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
   create_table "chats", force: :cascade do |t|
@@ -94,6 +112,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_02_185249) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "availability_slots", "users", column: "teacher_id"
+  add_foreign_key "bookings", "availability_slots"
+  add_foreign_key "bookings", "users"
   add_foreign_key "chats", "users", column: "student_id"
   add_foreign_key "chats", "users", column: "teacher_id"
   add_foreign_key "messages", "chats"

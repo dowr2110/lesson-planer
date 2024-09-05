@@ -1,0 +1,24 @@
+<%= link_to 'New Slot', new_availability_slot_path %>
+
+<h1>Available Slots</h1>
+<div id='student-calendar'></div>
+
+<div id="slotModal" class="modal">
+  <div class="modal-content">
+    <span id="closeModal" class="close">&times;</span>
+    <div class="modal-header">
+      <h5 class="modal-title" id="eventModalLabel">Event Details</h5>
+    </div>
+    <div class="modal-body">
+      <p><strong>Start Time:</strong> <span id="modalStartTime"></span></p>
+      <p><strong>End Time:</strong> <span id="modalEndTime"></span></p>
+      <p><strong>Description:</strong> <span id="modalDescription"></span></p>
+    </div>
+    <%= form_with url: { controller: 'bookings', action: 'create' }, local: true do |form| %>
+      <%= form.hidden_field :availability_slot_id, id: "availability_slot", readonly: true %>
+      <div class="actions">
+        <%= form.submit %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -11,4 +11,7 @@ Rails.application.routes.draw do
   resources :chats, only: %i[index show create] do
     resources :messages, only: [:create]
   end
+
+  resources :availability_slots, only: %i[index new create show]
+  resources :bookings, only: [:create]
 end
