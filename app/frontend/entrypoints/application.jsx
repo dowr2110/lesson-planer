@@ -2,7 +2,7 @@
 import '../styles/application.scss'
 import '../packs/lessons.js'
 import '../packs/slot-picker.js'
-import '../packs/student-calendar.js'
+import '../packs/slot-calendar.js'
 
 // React
 import React from 'react';

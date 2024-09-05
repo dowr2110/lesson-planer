@@ -7,11 +7,17 @@ class ChatsController < ApplicationController
 
   def show
     @chat = Chat.find(params[:id])
+    authorize @chat
+
     @messages = @chat.messages.order(created_at: :asc)
   end
 
   def create
+    new_chat = Chat.new(chat_params)
+    authorize new_chat
+
     @chat = Chat.create!(chat_params)
+
     redirect_to @chat
   end
 

@@ -36,6 +36,10 @@ class User < ApplicationRecord
   has_many :bookings
 
   def booked_slots
-    AvailabilitySlot.joins(:booking).where(bookings: { user_id: id })
+    if student?
+      AvailabilitySlot.joins(:booking).where(bookings: { user_id: id })
+    elsif teacher?
+      AvailabilitySlot.joins(:booking).where(teacher: self).where.not(bookings: { id: nil })
+    end
   end
 end

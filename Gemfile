@@ -32,6 +32,8 @@ gem 'simple_form'
 
 gem 'slim-rails'
 
+gem 'pundit'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 

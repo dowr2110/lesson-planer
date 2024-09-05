@@ -1,6 +1,6 @@
 h1 Welcome to the Home Page
 - if user_signed_in?
-  p Hello, #{current_user.email}!
+  p Hello, #{current_user.role.capitalize} #{current_user.email}!
   - if @profile
     h2 Your Profile
     - if @profile.avatar.attached?
@@ -29,6 +29,11 @@ h1 Welcome to the Home Page
     - elsif current_user.teacher?
       p No profile found.
       = link_to 'Create Teacher Profile', new_teacher_profile_path
+  br
+  - if current_user.student?
+    = link_to 'Availability slots', availability_slots_path, class: 'btn btn-primary'
+  - elsif current_user.teacher?
+    = link_to 'Availability slots', new_availability_slot_path, class: 'btn btn-primary'
   br
   = link_to 'Logout', destroy_user_session_path, method: 'delete'
 - else

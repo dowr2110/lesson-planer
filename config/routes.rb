@@ -12,6 +12,6 @@ Rails.application.routes.draw do
     resources :messages, only: [:create]
   end
 
-  resources :availability_slots, only: %i[index new create show]
+  resources :availability_slots, only: %i[index new create show destroy]
   resources :bookings, only: [:create]
 end
