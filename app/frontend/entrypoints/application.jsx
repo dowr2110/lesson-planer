@@ -1,5 +1,6 @@
 // imports for js and css
 import '../styles/application.scss'
+import '../styles/teacher-cards.scss'
 import '../packs/lessons.js'
 import '../packs/slot-picker.js'
 import '../packs/slot-calendar.js'

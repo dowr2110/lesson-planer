@@ -35,6 +35,8 @@ h1 Welcome to the Home Page
   - elsif current_user.teacher?
     = link_to 'Availability slots', new_availability_slot_path, class: 'btn btn-primary'
   br
+  = link_to 'Teachers', teachers_path, class: 'btn btn-primary'
+  br
   = link_to 'Logout', destroy_user_session_path, method: 'delete'
 - else
   = link_to 'Sign up', new_user_registration_path

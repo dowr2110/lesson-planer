@@ -14,4 +14,7 @@ Rails.application.routes.draw do
 
   resources :availability_slots, only: %i[index new create show destroy]
   resources :bookings, only: [:create]
+
+  resources :teachers, only: :index
+  post '/teachers/assign_student/:id', to: 'teachers#assign_student', as: 'assign_student'
 end

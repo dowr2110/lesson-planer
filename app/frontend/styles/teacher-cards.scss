@@ -1,0 +1,36 @@
+
+.teachers-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+
+  .teacher-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    width: 250px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .teacher-card h2 {
+    margin-top: 0;
+    font-size: 1.5em;
+  }
+
+  .teacher-card p {
+    margin: 5px 0;
+  }
+
+  .btn {
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .btn:hover {
+    background-color: #0056b3;
+  }
+}
