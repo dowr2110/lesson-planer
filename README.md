@@ -10,3 +10,4 @@ Things you may want to cover:
 * run commands: bundle install and yarn install (or nmp install)
 * Front-end builder command: bin/vite dev
 * ZOOM API - create an account in https://marketplace.zoom.us/ -> Develop -> Build App || or manage it in https://marketplace.zoom.us/user/build
+* Run Elasticsearch with docker -> docker run -d -p 9200:9200 -e "discovery.type=single-node" elasticsearch:7.17.10

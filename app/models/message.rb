@@ -26,4 +26,15 @@ class Message < ApplicationRecord
   encrypts :content
 
   validates :content, presence: true
+
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
+  settings do
+    mappings dynamic: false do
+      indexes :content, type: :text, analyzer: 'standard'
+      indexes :user_id, type: :integer
+      indexes :chat_id, type: :integer
+    end
+  end
 end
