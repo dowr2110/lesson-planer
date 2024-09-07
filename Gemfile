@@ -34,6 +34,12 @@ gem 'slim-rails'
 
 gem 'pundit'
 
+gem 'faraday'
+
+gem 'jwt'
+
+gem 'dry-monads'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 

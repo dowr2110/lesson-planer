@@ -27,6 +27,10 @@ document.addEventListener('DOMContentLoaded', function() {
         else if(info.extendedProps.teacher === false){
             document.getElementById('availability_slot').value = info.extendedProps.availability_slot_id
         }
+        else if(info.extendedProps.zoom_link !== null){
+            let zoomLink = document.getElementById('modalZoomLink')
+            zoomLink.href = info.extendedProps.zoom_link;
+        }
 
         let modal = document.getElementById("slotModal");
         let span = document.getElementById("closeModal");
@@ -62,8 +66,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             else {
                 if (event.title === 'Booked') {
-                    alert('Этот слот заблокирован и не доступен для выбора.');
-                    info.jsEvent.preventDefault();
+                    // alert('Этот слот заблокирован и не доступен для выбора.');
+                    // info.jsEvent.preventDefault();
+                    openModal(event)
                 }
                 else if (event.extendedProps.overlapped === true) {
                     alert('Этот слот пересекается с твоим забуканным');
