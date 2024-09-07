@@ -71,13 +71,13 @@ class AvailabilitySlotsController < ApplicationController
     render :index
   end
 
+  private
+
   def zoom_authorization
     if access_token_session.nil? && params[:code].nil?
       redirect_to "https://zoom.us/oauth/authorize?client_id=#{ENV['ZOOM_CLIENT_ID']}&response_type=code&redirect_uri=#{new_availability_slot_url}", allow_other_host: true
     end
   end
-
-  private
 
   def availability_slot_params
     params.require(:availability_slot).permit(:start_time, :end_time)
@@ -138,13 +138,6 @@ class AvailabilitySlotsController < ApplicationController
 
     JSON.parse(response.body)['join_url']
   end
-
-  # def handle_response(response)
-  #   case response.status
-  #   when 200
-  #     JSON.parse(response.body)
-  #   end
-  # end
 
   def access_token_session
     token_data = session[:zoom_client_access_token]

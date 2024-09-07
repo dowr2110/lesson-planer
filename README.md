@@ -9,3 +9,4 @@ Things you may want to cover:
 * Node version - 22.7.0
 * run commands: bundle install and yarn install (or nmp install)
 * Front-end builder command: bin/vite dev
+* ZOOM API - create an account in https://marketplace.zoom.us/ -> Develop -> Build App || or manage it in https://marketplace.zoom.us/user/build
