@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   resources :student_profiles, only: %i[new create edit update]
 
   resources :chats, only: %i[index show create] do
-    resources :messages, only: [:create]
+    resources :messages, only: [:create] do
+      collection do
+        get :search
+      end
+    end
   end
 
   resources :availability_slots, only: %i[index new create show destroy]

@@ -3,7 +3,15 @@
 #chat-container.chat-container data-chat-id=@chat.id data-user-id=current_user.id
   #messages.chat-window
     = render @messages
+  #search-messages.chat-window style='display: none;'
   .chat-input
     .input-group
       input type="text" id="message_input" placeholder="Type a message..." class='message-input'
       button#send_message_button.send-button send
+    br
+    = form_tag search_chat_messages_path(@chat), method: :get, remote: true, id: "search-form" do
+      .input-group
+        input type="text" name="query" id="search_input" placeholder="Search messages..." class='message-input'
+        .input-group-append
+          button#search_button.send-button style='margin-right: 5px;' type="submit" search
+          button#clear_button.send-button clear

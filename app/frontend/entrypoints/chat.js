@@ -9,6 +9,11 @@ document.addEventListener('DOMContentLoaded', () => {
         chatWindow.scrollTop = chatWindow.scrollHeight;
     }
 
+    function showMessages() {
+        document.getElementById('messages').style.display = 'block'
+        document.getElementById('search-messages').style.display = 'none'
+    }
+
     // Connect to ActionCable
     const consumer = createConsumer();
 
@@ -41,6 +46,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const messageInput = document.getElementById('message_input');
         const message = messageInput.value;
 
+        showMessages();
+
         if (message.trim() !== '') {
             sendMessage(message).then(() => {
                 messageInput.value = '';
@@ -51,3 +58,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    const searchForm = document.getElementById('search-form');
+
+    searchForm.addEventListener('ajax:error', function(event) {
+        console.error('Search failed:', event.detail[2].statusText);
+    });
+
+    document.getElementById('search_button').addEventListener('click', function() {
+        document.getElementById('messages').style.display = 'none'
+        document.getElementById('search-messages').style.display = 'block'
+    });
+
+    document.getElementById('clear_button').addEventListener('click', function() {
+        document.getElementById('messages').style.display = 'block'
+        document.getElementById('search-messages').style.display = 'none'
+    });
+});
