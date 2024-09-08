@@ -32,8 +32,14 @@ h1 Welcome to the Home Page
   br
   - if current_user.student?
     = link_to 'Availability slots', availability_slots_path, class: 'btn btn-primary'
+    br
+    - current_user.chats_as_student.each do |chat|
+      = link_to "Chat with #{chat.teacher.email}", chat_path(chat), class: 'btn btn-primary'
   - elsif current_user.teacher?
     = link_to 'Availability slots', new_availability_slot_path, class: 'btn btn-primary'
+    br
+    - current_user.chats_as_teacher.each do |chat|
+      = link_to "Chat with #{chat.student.email}", chat_path(chat), class: 'btn btn-primary'
   br
   = link_to 'Teachers', teachers_path, class: 'btn btn-primary'
   br

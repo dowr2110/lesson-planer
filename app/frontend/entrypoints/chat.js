@@ -4,6 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const chatId = document.querySelector('#chat-container').getAttribute('data-chat-id');
     const userId = document.querySelector('#chat-container').getAttribute('data-user-id');
 
+    function scrollToBottom() {
+        let chatWindow = document.querySelector('.chat-window');
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+
     // Connect to ActionCable
     const consumer = createConsumer();
 
@@ -11,6 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
         { channel: "ChatChannel", chat_id: chatId },
         {
             connected() {
+                scrollToBottom();
                 console.log("Connected to the chat channel with chat_id:", chatId);
             },
             disconnected() {
@@ -19,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
             received(data) {
                 const messagesContainer = document.getElementById('messages');
                 messagesContainer.innerHTML += data.message;
+                scrollToBottom();
             }
         }
     );

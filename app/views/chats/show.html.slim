@@ -1,7 +1,9 @@
 = vite_javascript_tag 'chat'
 
-#chat-container data-chat-id=@chat.id data-user-id=current_user.id
-  #messages
+#chat-container.chat-container data-chat-id=@chat.id data-user-id=current_user.id
+  #messages.chat-window
     = render @messages
-  input type="text" id="message_input" placeholder="Type a message..."
-  button#send_message_button
+  .chat-input
+    .input-group
+      input type="text" id="message_input" placeholder="Type a message..." class='message-input'
+      button#send_message_button.send-button send

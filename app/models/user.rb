@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: users
@@ -32,6 +34,13 @@ class User < ApplicationRecord
 
   accepts_nested_attributes_for :teacher_profile
   accepts_nested_attributes_for :student_profile
+
+  has_many :chats_as_student,
+           foreign_key: :student_id,
+           class_name: 'Chat'
+  has_many :chats_as_teacher,
+           foreign_key: :teacher_id,
+           class_name: 'Chat'
 
   has_many :bookings
 

@@ -9,7 +9,8 @@ class ChatsController < ApplicationController
     @chat = Chat.find(params[:id])
     authorize @chat
 
-    @messages = @chat.messages.order(created_at: :asc)
+    @current_user = current_user
+    @messages = @chat.messages.where('created_at >= ?', 1.week.ago).order(created_at: :asc)
   end
 
   def create

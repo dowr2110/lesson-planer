@@ -1,4 +1,7 @@
-.message
-  strong
-    = message.user.role.capitalize
-  = message.content
+div class="#{message.user == @current_user ? 'message-right' : '' }"
+  div class="message-bubble #{message.user == @current_user ? 'received' : 'sent' }"
+    .message-content
+      = message.content
+    .message-meta
+      span.message-time
+        = message.created_at.strftime("%H:%M")

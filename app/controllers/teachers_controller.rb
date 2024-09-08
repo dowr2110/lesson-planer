@@ -14,6 +14,8 @@ class TeachersController < ApplicationController
       flash[:notice] = 'Teacher is already assigned.'
     else
       student.teachers << teacher
+      Chat.create(student: student, teacher: teacher)
+
       flash[:notice] = 'Teacher assigned successfully.'
     end
     redirect_to teachers_path
