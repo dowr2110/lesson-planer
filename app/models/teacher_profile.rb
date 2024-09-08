@@ -21,4 +21,7 @@ class TeacherProfile < ApplicationRecord
   belongs_to :user
 
   has_one_attached :avatar
+
+  has_many :teacher_disciplines, dependent: :destroy
+  has_many :disciplines, through: :teacher_disciplines
 end

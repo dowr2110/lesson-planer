@@ -1,12 +1,13 @@
-.teachers-list
-  - @teachers.each do |teacher|
-    .teacher-card
-      p Email: #{teacher.email}
+= form_tag teachers_path, method: :get, remote: true, class: "form-inline" do
+  .form-group
+    = label_tag :email, "Search by email"
+    = text_field_tag :email, params[:email], class: "form-control"
 
-      - if current_user.student?
-        - if !current_user.teachers.include?(teacher)
-          = form_with url: assign_student_path(current_user), method: :post, local: true do |form|
-            = form.hidden_field :teacher_id, value: teacher.id
-            = form.submit "Create Contact", class: "btn btn-primary"
-        - else
-          p Connected
+  .form-group
+    = label_tag :discipline_id, "Filter by discipline"
+    = select_tag :discipline_id, options_from_collection_for_select(Discipline.all, :id, :name, params[:discipline_id]), include_blank: "Все дисциплины", class: "form-control"
+
+  = submit_tag "Search...", class: "btn btn-primary"
+
+#teacher-list.teachers-list
+  =render 'teacher_list'

@@ -4,7 +4,14 @@ class TeachersController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @teachers = User.where(role: :teacher)
+    @teachers = TeacherProfile.joins(:user)
+    @teachers = @teachers.where("users.email ILIKE ?", "%#{params[:email]}%") if params[:email].present?
+    @teachers = @teachers.joins(:disciplines).where(disciplines: { id: params[:discipline_id] }) if params[:discipline_id].present?
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def assign_student

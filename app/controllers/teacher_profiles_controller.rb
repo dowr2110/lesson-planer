@@ -38,6 +38,6 @@ class TeacherProfilesController < ApplicationController
   end
 
   def teacher_profile_params
-    params.require(:teacher_profile).permit(:specialization, :experience, :avatar)
+    params.require(:teacher_profile).permit(:specialization, :experience, :avatar, discipline_ids: [])
   end
 end

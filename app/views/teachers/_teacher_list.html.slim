@@ -1,0 +1,11 @@
+- @teachers.each do |teacher|
+  .teacher-card
+    p Email: #{teacher.user.email}
+
+    - if current_user.student?
+      - if !current_user.teachers.include?(teacher.user)
+        = form_with url: assign_student_path(current_user), method: :post, local: true do |form|
+          = form.hidden_field :teacher_id, value: teacher.user.id
+          = form.submit "Create Contact", class: "btn btn-primary"
+      - else
+        p Connected

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_09_06_101809) do
+ActiveRecord::Schema[7.1].define(version: 2024_09_08_130636) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -61,6 +61,12 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_06_101809) do
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "chats", force: :cascade do |t|
     t.bigint "student_id", null: false
     t.bigint "teacher_id", null: false
@@ -68,6 +74,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_06_101809) do
     t.datetime "updated_at", null: false
     t.index ["student_id"], name: "index_chats_on_student_id"
     t.index ["teacher_id"], name: "index_chats_on_teacher_id"
+  end
+
+  create_table "disciplines", force: :cascade do |t|
+    t.string "name"
+    t.bigint "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_disciplines_on_category_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -99,6 +113,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_06_101809) do
     t.index ["teacher_id"], name: "index_student_teacher_connections_on_teacher_id"
   end
 
+  create_table "teacher_disciplines", force: :cascade do |t|
+    t.bigint "teacher_profile_id", null: false
+    t.bigint "discipline_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["discipline_id"], name: "index_teacher_disciplines_on_discipline_id"
+    t.index ["teacher_profile_id"], name: "index_teacher_disciplines_on_teacher_profile_id"
+  end
+
   create_table "teacher_profiles", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "specialization"
@@ -128,10 +151,13 @@ ActiveRecord::Schema[7.1].define(version: 2024_09_06_101809) do
   add_foreign_key "bookings", "users"
   add_foreign_key "chats", "users", column: "student_id"
   add_foreign_key "chats", "users", column: "teacher_id"
+  add_foreign_key "disciplines", "categories"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
   add_foreign_key "student_profiles", "users"
   add_foreign_key "student_teacher_connections", "users", column: "student_id"
   add_foreign_key "student_teacher_connections", "users", column: "teacher_id"
+  add_foreign_key "teacher_disciplines", "disciplines"
+  add_foreign_key "teacher_disciplines", "teacher_profiles"
   add_foreign_key "teacher_profiles", "users"
 end
