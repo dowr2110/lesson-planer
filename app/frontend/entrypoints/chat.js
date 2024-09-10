@@ -74,4 +74,13 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('messages').style.display = 'block'
         document.getElementById('search-messages').style.display = 'none'
     });
+
+    const messagesContainer = document.getElementById('search-messages');
+    messagesContainer.addEventListener('click', function(event) {
+        if (event.target.id) {
+            document.getElementById('messages').style.display = 'block'
+            document.getElementById('search-messages').style.display = 'none'
+            document.getElementById(event.target.id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    });
 });

@@ -2,6 +2,7 @@
 
 class AvailabilitySlotsController < ApplicationController
   before_action :authenticate_user!
+  before_action :check_teacher_status, only: %i[new create destroy]
   before_action :authorize_slot, only: %i[index new create]
   before_action :zoom_authorization, only: :new
 

@@ -1,0 +1,13 @@
+.teachers-list
+  - @my_students.each do |student|
+    - chat = current_user.chats_as_teacher.find_by(student: student)
+    .teacher-card
+      p Email: #{student.email}
+
+      - if chat.present?
+        = link_to "Continue chat", chat_path(current_user.chats_as_teacher.find_by(student: student)), class: 'btn btn-primary'
+      - else
+        = form_with url: chats_path, method: :post, local: true do |form|
+          = form.hidden_field :student_id, value: student.id
+          = form.hidden_field :teacher_id, value: current_user.id
+          = form.submit "start chat", class: "btn btn-primary"

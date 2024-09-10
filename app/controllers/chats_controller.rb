@@ -2,8 +2,7 @@
 
 class ChatsController < ApplicationController
   before_action :authenticate_user!
-
-  def index; end
+  before_action :check_teacher_status
 
   def show
     @chat = Chat.find(params[:id])

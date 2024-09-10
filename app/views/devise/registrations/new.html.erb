@@ -17,6 +17,12 @@
   </div>
 
   <div class="field">
+    <%= f.label :role %><br />
+    <%= f.check_box :role, { checked: false }, 'teacher' %>
+    <%= f.label :role, 'Teacher' %>
+  </div>
+
+  <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>

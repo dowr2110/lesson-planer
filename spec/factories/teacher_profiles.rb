@@ -5,6 +5,7 @@
 #  id             :bigint           not null, primary key
 #  experience     :text
 #  specialization :string
+#  status         :integer          default("verification_pending")
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  user_id        :bigint           not null

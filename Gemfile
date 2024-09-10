@@ -43,6 +43,8 @@ gem 'dry-monads'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 
+gem 'paper_trail'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 

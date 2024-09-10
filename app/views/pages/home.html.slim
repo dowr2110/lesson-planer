@@ -22,6 +22,9 @@ h1 Welcome to the Home Page
         strong Experience:
         = @profile.experience
       = link_to 'Edit Profile', edit_teacher_profile_path(@profile), class: 'btn btn-primary'
+      - if current_user.students.present?
+        br
+        = link_to 'My students', my_students_teachers_path, class: 'btn btn-primary'
   - else
     - if current_user.student?
       p No profile found.

@@ -5,6 +5,7 @@
 #  id             :bigint           not null, primary key
 #  experience     :text
 #  specialization :string
+#  status         :integer          default("verification_pending")
 #  created_at     :datetime         not null
 #  updated_at     :datetime         not null
 #  user_id        :bigint           not null
@@ -24,4 +25,22 @@ class TeacherProfile < ApplicationRecord
 
   has_many :teacher_disciplines, dependent: :destroy
   has_many :disciplines, through: :teacher_disciplines
+
+  has_paper_trail
+
+  enum status: %i[verification_pending updated verified declined]
+
+  scope :listable, -> { where(status: %i[updated verified]) }
+
+  def status_update
+    if status == 'verified'
+      updated!
+    else
+      verification_pending!
+    end
+  end
+
+  def publish
+    verified!
+  end
 end

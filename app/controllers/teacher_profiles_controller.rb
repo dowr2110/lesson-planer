@@ -11,7 +11,8 @@ class TeacherProfilesController < ApplicationController
   def create
     @teacher_profile = current_user.build_teacher_profile(teacher_profile_params)
     if @teacher_profile.save
-      flash[:notice] = 'Profile was successfully created.'
+      flash[:notice] = 'Profile was sent to review.'
+      @teacher_profile.status_update
       redirect_to root_path
     else
       flash.now[:alert] = 'There was an error creating the profile.'
@@ -23,7 +24,8 @@ class TeacherProfilesController < ApplicationController
 
   def update
     if @teacher_profile.update(teacher_profile_params)
-      flash[:notice] = 'Profile was successfully updated.'
+      flash[:notice] = 'Profile was sent to review.'
+      @teacher_profile.status_update
       redirect_to root_path
     else
       flash.now[:alert] = 'There was an error updating the profile.'
