@@ -1,0 +1,39 @@
+version: '3'
+services:
+  web:
+    build: .
+    command: bash -c "bundle exec rails s -b '0.0.0.0' -p 3000"
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - elasticsearch
+      - rabbitmq
+    environment:
+      DATABASE_URL: postgres://postgres:password@db:5432/app_development
+      ELASTICSEARCH_URL: http://elasticsearch:9200
+      RABBITMQ_URL: http://rabbitmq:5672
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: app_development
+    ports:
+      - "5433:5432"
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.10
+    environment:
+      discovery.type: single-node
+    ports:
+      - "9200:9200"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
