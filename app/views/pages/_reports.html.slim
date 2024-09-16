@@ -1,0 +1,43 @@
+- if @report_data.present?
+  .container
+    h1 Booking Report (Current Month)
+
+    / Total Bookings
+    .report-section
+      h2 Total Bookings
+      p.highlight = "#{@report_data['total_bookings']} Booking#{'s' if @report_data['total_bookings'] > 1}"
+
+    / Bookings by Teacher
+    .report-section
+      h2 Bookings by Teacher
+      ul.data-list
+        - @report_data['bookings_by_teacher'].each do |teacher_id, bookings|
+          li
+            | Teacher #{User.find(teacher_id).name}:
+            span.highlight = " #{bookings} Booking#{'s' if bookings > 1}"
+
+    / Bookings by Student
+    .report-section
+      h2 Bookings by Student
+      ul.data-list
+        - @report_data['bookings_by_student'].each do |student_id, bookings|
+          li
+            | Student #{User.find(student_id).name}:
+            span.highlight = " #{bookings} Booking#{'s' if bookings > 1}"
+
+    / Bookings by Hour
+    .report-section
+      h2 Bookings by Hour
+      ul.data-list
+        - @report_data['bookings_by_hour'].each do |hour, bookings|
+          li
+            | Hour #{hour}:
+            span.highlight = " #{bookings} Booking#{'s' if bookings > 1}"
+
+    / Peak Hour
+    .report-section
+      h2 Peak Hour
+      p.highlight = "#{@report_data['peak_hour']} AM"
+- else
+  .container
+    h1 Sorry.. Something wrong with Booking Reports

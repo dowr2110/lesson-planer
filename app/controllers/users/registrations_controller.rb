@@ -7,11 +7,15 @@ module Users
     protected
 
     def configure_permitted_parameters
-      devise_parameter_sanitizer.permit(:sign_up, keys: [:role])
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:role, :name])
     end
 
     def after_sign_up_path_for(_)
-      new_teacher_profile_path if current_user.teacher?
+      if current_user.teacher?
+        new_teacher_profile_path
+      else
+        root_path
+      end
     end
   end
 end

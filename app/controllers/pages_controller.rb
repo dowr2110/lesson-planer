@@ -6,21 +6,30 @@ class PagesController < ApplicationController
       @profile = current_user.student_profile
     end
 
-    puts 'micro-service check'
-    puts fetch_daily_report
+    @report_data = fetch_monthly_report
   end
 
   private
 
-  def fetch_daily_report(date = Date.today)
-    uri = URI("http://localhost:3001/booking_reports/daily?date=#{date}")
+  def fetch_monthly_report
+    uri = URI("#{ENV.fetch('ANALYTICS_SERVICE_URL', 'http://localhost:3001')}/booking_reports/monthly")
     request = Net::HTTP::Get.new(uri)
     request['Authorization'] = ENV['API_AUTH_TOKEN']
 
-    response = Net::HTTP.start(uri.hostname, uri.port) do |http|
-      http.request(request)
-    end
+    begin
+      response = Net::HTTP.start(uri.hostname, uri.port, read_timeout: 10) do |http| # Устанавливаем таймаут 10 секунд
+        http.request(request)
+      end
 
-    JSON.parse(response.body)
+      if response.is_a?(Net::HTTPSuccess)
+        JSON.parse(response.body)
+      else
+        Rails.logger.error("Analytics service responded with error: #{response.code}")
+        {}
+      end
+    rescue Timeout::Error, Errno::ECONNREFUSED => e
+      Rails.logger.error("Error connecting to analytics service: #{e.message}")
+      {}
+    end
   end
 end
