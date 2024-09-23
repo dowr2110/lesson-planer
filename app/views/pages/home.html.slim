@@ -1,6 +1,15 @@
 h1 Welcome to the Home Page
 - if user_signed_in?
-  p Hello, #{current_user.role.capitalize} #{current_user.email}!
+  .buttons-container
+    - if current_user.student?
+      - current_user.chats_as_student.each do |chat|
+        = link_to "Chat with #{chat.teacher.name}", chat_path(chat), class: 'button'
+    - elsif current_user.teacher?
+      - current_user.chats_as_teacher.each do |chat|
+        = link_to "Chat with #{chat.student.name}", chat_path(chat), class: 'button'
+      - if current_user.students.present?
+        = link_to 'My students', my_students_teachers_path, class: 'button'
+
   - if @profile
     h2 Your Profile
     - if @profile.avatar.attached?
@@ -13,7 +22,6 @@ h1 Welcome to the Home Page
       p
         strong Interests:
         = @profile.interests
-      = link_to 'Edit Profile', edit_student_profile_path(@profile), class: 'btn btn-primary'
     - elsif current_user.teacher?
       p
         strong Specialization:
@@ -21,35 +29,8 @@ h1 Welcome to the Home Page
       p
         strong Experience:
         = @profile.experience
-      = link_to 'Edit Profile', edit_teacher_profile_path(@profile), class: 'btn btn-primary'
-      - if current_user.students.present?
-        br
-        = link_to 'My students', my_students_teachers_path, class: 'btn btn-primary'
   - else
-    - if current_user.student?
-      p No profile found.
-      = link_to 'Create Student Profile', new_student_profile_path
-    - elsif current_user.teacher?
-      p No profile found.
-      = link_to 'Create Teacher Profile', new_teacher_profile_path
-  br
-  - if current_user.student?
-    = link_to 'Availability slots', availability_slots_path, class: 'btn btn-primary'
-    br
-    - current_user.chats_as_student.each do |chat|
-      = link_to "Chat with #{chat.teacher.email}", chat_path(chat), class: 'btn btn-primary'
-  - elsif current_user.teacher?
-    = link_to 'Availability slots', new_availability_slot_path, class: 'btn btn-primary'
-    br
-    - current_user.chats_as_teacher.each do |chat|
-      = link_to "Chat with #{chat.student.email}", chat_path(chat), class: 'btn btn-primary'
-  br
-  = link_to 'Teachers', teachers_path, class: 'btn btn-primary'
-  br
-  = link_to 'Logout', destroy_user_session_path, method: 'delete'
-- else
-  = link_to 'Sign up', new_user_registration_path
-  |  or
-  = link_to 'Login', new_user_session_path
+    p No profile found.
 
-= render 'reports'
+  = render 'reports'
+- else

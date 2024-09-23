@@ -17,5 +17,8 @@ html
         div class="flash #{ key }"
           = message
 
+    = render 'layouts/header'
+    main
+      = yield
+    = render 'layouts/footer'
 
-    = yield

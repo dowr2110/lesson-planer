@@ -1,0 +1,37 @@
+- if user_signed_in? && current_user.teacher?
+  - profile = current_user.teacher_profile
+- elsif user_signed_in? && current_user.student?
+  - profile = current_user.student_profile
+
+header
+  .header-container
+    .logo
+      a href="/" Home
+    nav
+      ul.nav-links
+        - if current_user.student?
+          - if profile.created_at?
+            li
+              = link_to 'Edit Profile', edit_student_profile_path(profile)
+          - else
+            li
+              = link_to 'Create Student Profile', new_student_profile_path
+          li
+            = link_to 'Availability slots', availability_slots_path
+        - elsif current_user.teacher?
+          - if profile.created_at?
+            li
+              = link_to 'Edit Profile', edit_teacher_profile_path(profile)
+          - else
+            li
+              = link_to 'Create Teacher Profile', new_teacher_profile_path
+          li
+            = link_to 'Availability slots', new_availability_slot_path
+        li
+          = link_to 'Teachers', teachers_path
+    .nav-actions
+      - if user_signed_in?
+        = link_to 'Logout', destroy_user_session_path, method: 'delete', class: 'button'
+      - else
+        = link_to 'Sign up', new_user_registration_path, class: 'button'
+        = link_to 'Login', new_user_session_path, class: 'button'
