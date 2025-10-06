@@ -9,8 +9,8 @@ header
       a href="/" Home
     nav
       ul.nav-links
-        - if current_user.student?
-          - if profile.created_at?
+        - if user_signed_in? && current_user.student?
+          - if profile.present?
             li
               = link_to 'Edit Profile', edit_student_profile_path(profile)
           - else
@@ -18,8 +18,8 @@ header
               = link_to 'Create Student Profile', new_student_profile_path
           li
             = link_to 'Availability slots', availability_slots_path
-        - elsif current_user.teacher?
-          - if profile.created_at?
+        - elsif user_signed_in? && current_user.teacher?
+          - if profile.present?
             li
               = link_to 'Edit Profile', edit_teacher_profile_path(profile)
           - else

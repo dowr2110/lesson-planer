@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-ruby '3.0.0'
+ruby '3.3.0'
 
 gem 'rails', '~> 7.1.3'
 
@@ -74,8 +74,9 @@ end
 
 group :development do
   gem 'annotate'
-  gem 'rubocop', '1.4.2', require: false
-  gem 'rubocop-performance', '1.9.0', require: false
+  gem 'rubocop', require: false
+  gem 'rubocop-performance',require: false
+  gem 'rubocop-rails', require: false
   gem 'web-console'
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]

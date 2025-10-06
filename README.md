@@ -18,7 +18,7 @@ build with DOCKER:
 * run worker in lp-analytics-service
 
 build without DOCKER:
-* Ruby version - 3.0.0
+* Ruby version - 3.3.0
 * Node version - 22.7.0
 * run commands: `bundle install` and `yarn install` (or nmp install)
 * Front-end builder command: `bin/vite dev`
